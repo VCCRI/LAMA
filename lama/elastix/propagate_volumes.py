@@ -216,7 +216,7 @@ class PropagateHeatmap(PropagateLabelMap):
     def __init__(self, *args, **kwargs):
         super(PropagateHeatmap, self).__init__(*args, **kwargs)
         self.invert_transform_name = PROPAGATE_IMAGE_TRANSFORM
-
+        self.PROPAGATION_TFORM_NAME = PROPAGATE_IMAGE_TRANSFORM
 
 class PropagateMeshes(Propagate):
 
@@ -297,7 +297,8 @@ class PropagateSingleVol(Propagate):
     def __init__(self, *args, **kwargs):
         super(PropagateSingleVol, self).__init__(*args, **kwargs)
         self.invert_transform_name = PROPAGATE_IMAGE_TRANSFORM
-
+        self.PROPAGATION_TFORM_NAME = PROPAGATE_IMAGE_TRANSFORM
+        
     def run(self, prefix=None):
         """
         Parameters
@@ -385,15 +386,20 @@ class PropagateSingleVol(Propagate):
 
 def chain_tforms(root_dir: Path, new_tform_dir, tform_name, config):
 
+    #label_replacements = {
+    #    'FinalBSplineInterpolationOrder': '0',
+    #    'FixedInternalImagePixelType': 'short',
+    #    'MovingInternalImagePixelType': 'short',
+    #    'ResultImagePixelType': '"unsigned char"',
+    #    'WriteTransformParametersEachResolution': 'false',
+    #    'WriteResultImageAfterEachResolution': 'false'
+    #}
+    
     label_replacements = {
-        'FinalBSplineInterpolationOrder': '0',
-        'FixedInternalImagePixelType': 'short',
-        'MovingInternalImagePixelType': 'short',
-        'ResultImagePixelType': '"unsigned char"',
         'WriteTransformParametersEachResolution': 'false',
         'WriteResultImageAfterEachResolution': 'false'
     }
-
+    
     stages = config['label_propagation_order']
 
     # stages = stages[::-1]
