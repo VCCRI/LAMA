@@ -141,11 +141,11 @@ def _overlay_labels(first_stage_reg_dir: Path,
                 out_path_sag = sag_dir / f'{base}_{idx_}.png'
                 _blend_8bit(slice_sag, l_slice_sag, out_path_sag)
             if mask is None: # get a few slices from middle
-                sag_indxs = np.linspace(0, arr.shape[2], 8, dtype=np.int)[2:-2]
+                sag_indxs = np.linspace(0, arr.shape[2], 8, dtype=int)[2:-2]
             else:
                 sag_start = bbox[2]
                 sag_end = bbox[5]
-                sag_indxs = np.linspace(sag_start, sag_end, 6, dtype=np.int)[1:-1] # Take the 4 inner slices
+                sag_indxs = np.linspace(sag_start, sag_end, 6, dtype=int)[1:-1] # Take the 4 inner slices
             for idx in sag_indxs:
                 sag(idx)
 
@@ -157,11 +157,11 @@ def _overlay_labels(first_stage_reg_dir: Path,
                 out_path_ax = ax_dir / f'{base}_{idx_}.png'
                 _blend_8bit(slice_ax, l_slice_ax, out_path_ax)
             if mask is None: # get a few slices from middle
-                ax_indxs = np.linspace(0, arr.shape[0], 8, dtype=np.int)[2:-2]
+                ax_indxs = np.linspace(0, arr.shape[0], 8, dtype=int)[2:-2]
             else:
                 ax_start = bbox[0]
                 ax_end = bbox[3]
-                ax_indxs = np.linspace(ax_start, ax_end, 6, dtype=np.int)[1:-1]
+                ax_indxs = np.linspace(ax_start, ax_end, 6, dtype=int)[1:-1]
             for idx in ax_indxs:
                 ax(idx)
 
@@ -173,11 +173,11 @@ def _overlay_labels(first_stage_reg_dir: Path,
                 out_path_cor = cor_dir / f'{base}_{idx_}.png'
                 _blend_8bit(slice_cor, l_slice_cor, out_path_cor)
             if mask is None: # get a few slices from middle
-                cor_indxs = np.linspace(0, arr.shape[1], 8, dtype=np.int)[2:-2]
+                cor_indxs = np.linspace(0, arr.shape[1], 8, dtype=int)[2:-2]
             else:
                 cor_start = bbox[1]
                 cor_end = bbox[4]
-                cor_indxs = np.linspace(cor_start, cor_end, 6, dtype=np.int)[1:-1]
+                cor_indxs = np.linspace(cor_start, cor_end, 6, dtype=int)[1:-1]
             for idx in cor_indxs:
                 cor(idx)
 
