@@ -454,7 +454,7 @@ def alternative(input_data: pd.DataFrame,
         data_df = df_wt_mut.drop(columns=info_columns)
 
         # Get columns (labels) where all speciemns have null values (i.e. all the line is QC-flagged at these labels)
-        labels_to_skip = [col for col, isany in line_df.any().iteritems() if not isany]
+        labels_to_skip = [col for col, isany in line_df.any().items() if not isany]
         if labels_to_skip:
             # Set the whole label column to zero. R:lm() will return NaN for this column
             data_df[labels_to_skip] = 0.0
@@ -486,7 +486,7 @@ def alternative(input_data: pd.DataFrame,
 
         # Get columns (labels) where the mutant specimen (as it's line level)
         # has a null value (i.e. This specimen is QC-flagged at these labels)
-        labels_to_skip = [col for col, isany in pd.DataFrame(row).T.any().iteritems() if not isany]
+        labels_to_skip = [col for col, isany in pd.DataFrame(row).T.any().items() if not isany]
         if labels_to_skip:
             # Set the whole label column to zero. R:lm() will return NaN for this column
             data_df[labels_to_skip] = 0.0
