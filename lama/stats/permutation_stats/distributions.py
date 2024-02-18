@@ -481,7 +481,7 @@ def alternative(input_data: pd.DataFrame,
     for specimen_id, row in mutants.iterrows():
         row['genotype'] = 'hom'
         line_id = row['line']
-        df_wt_mut = baseline.append(row)
+        df_wt_mut = pd.concat([baseline,pd.DataFrame([row])], ignore_index=True)
         data_df = df_wt_mut.drop(columns=['line', 'genotype', 'staging'])
 
         # Get columns (labels) where the mutant specimen (as it's line level)
