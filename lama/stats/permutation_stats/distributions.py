@@ -321,8 +321,8 @@ def _null_line_thread(*args) -> List[float]:
 
     label = data.columns[0]
 
-    data = data.astype({label: np.float,
-                        'staging': np.float})
+    data = data.astype({label: float,
+                        'staging': float})
 
     synthetics_sets_done = []
 
