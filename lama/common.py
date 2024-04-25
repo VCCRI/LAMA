@@ -250,7 +250,7 @@ def pad(array, dims):
     padded = np.pad(array, ())
 
 
-def write_array(array: np.ndarray, path: Union[str, Path], compressed=True, ras=True):
+def write_array(array: np.ndarray, path: Union[str, Path], compressed=False, ras=True):
     """
     Write a numpy array to and image file using SimpleITK.
     If an RAS nrrd has been read by sitk, converted to numpy then read back as sitk Image it will be written out
