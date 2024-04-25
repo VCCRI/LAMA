@@ -73,7 +73,9 @@ def date_dhm() -> datetime.datetime:
     -------
 
     """
-    return datetime.datetime.now().replace(second=0, microsecond=0)
+    modDate = str(datetime.datetime.now().replace(second=0, microsecond=0)).replace(':', '.')
+    modDate = modDate.replace(' ', '_')
+    return modDate
 
 
 class RegistrationException(Exception):
