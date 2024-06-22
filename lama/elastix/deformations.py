@@ -281,18 +281,22 @@ def _get_deformations(tform: Path,
                 "The jacobian determinant for {} has negative values. You may need to add a penalty term to the later registration stages".format(
                     specimen_id))
             # Highlight the regions folding
-            jac_arr[jac_arr > 0] = 0
+            jac_neg = np.copy(jac_arr)
+            jac_neg[jac_arr > 0] = 0
             log_jac_path = log_jacobians_dir / ('ERROR_NEGATIVE_JACOBIANS_' + specimen_id + '.' + filetype)
-            common.write_array(jac_arr, log_jac_path)
-
-        elif write_log_jacobians:
-            # Spit out the log transformed jacobians
-            log_jac = np.log(jac_arr)
-            log_jac_path = log_jacobians_dir / ( 'log_jac_' + specimen_id + '.' + filetype)
-
-            if not write_raw_jacobians:
+            common.write_array(jac_neg, log_jac_path)
+            if write_log_jacobians:
+                jac_arr[jac_arr <= 0] = 1 # make zero and negative jac values equal 1, which is no change
+                #log base 10 transform jacobians
+                log_jac = np.log10(jac_arr)
+                log_jac_path = log_jacobians_dir / ( 'log_jac_' + specimen_id + '.' + filetype)
+                common.write_array(log_jac, log_jac_path)
+            #else write_raw_jacobians:
+            else:
                 new_jac.unlink()
-
+        else:
+            log_jac = np.log10(jac_arr)
+            log_jac_path = log_jacobians_dir / ( 'log_jac_' + specimen_id + '.' + filetype)
             common.write_array(log_jac, log_jac_path)
 
 
