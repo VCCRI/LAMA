@@ -149,10 +149,10 @@ class VoxelWriter(ResultsWriter):
         heatmap_path_unfiltered = outdir / f'{name}_{self.stats_name}_t.nrrd'
 
         # Write qval-filtered t-stats
-        write_array(filtered_result, heatmap_path, ras=True)
+        write_array(filtered_result, heatmap_path, compressed=True, ras=True)
 
         # Write raw t-stats
-        write_array(unfiltered_result, heatmap_path_unfiltered, ras=True)
+        write_array(unfiltered_result, heatmap_path_unfiltered, compressed=True, ras=True)
 
         return heatmap_path
 
