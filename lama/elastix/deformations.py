@@ -283,7 +283,7 @@ def _get_deformations(tform: Path,
             # Highlight the regions folding
             jac_neg = np.copy(jac_arr)
             jac_neg[jac_arr > 0] = 0
-            log_jac_path = log_jacobians_dir / ('ERROR_NEGATIVE_JACOBIANS_' + specimen_id + '.' + filetype)
+            log_jac_path = log_jacobians_dir.parent / ('ERROR_NEGATIVE_JACOBIANS_' + specimen_id + '.' + filetype)
             common.write_array(jac_neg, log_jac_path)
             if write_log_jacobians:
                 jac_arr[jac_arr <= 0] = 1 # make zero and negative jac values equal 1, which is no change
