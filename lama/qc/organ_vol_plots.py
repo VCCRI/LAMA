@@ -220,6 +220,7 @@ def make_plots(organ_vols: pd.DataFrame,
             scatter_df = organ_vols.loc[(organ_vols.line == 'baseline') | (organ_vols.line == mut_line)]
             scatter_df = scatter_df[[label, WEV_LABEL, 'line']]
             scatter_df.rename(columns={label: label_name, 'line': 'genotype'}, inplace=True)
+            scatter_df.to_csv(stats_root_dir.parent / 'scatter_df.csv', mode='a', index=True, header=True)
             sax = sns.scatterplot(y=label_name, x=WEV_LABEL, ax=s_axes, hue='genotype',
                                   data=scatter_df)
 
