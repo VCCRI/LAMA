@@ -287,15 +287,15 @@ def _get_deformations(tform: Path,
             common.write_array(jac_neg, log_jac_path)
             if write_log_jacobians:
                 jac_arr[jac_arr <= 0] = 1 # make zero and negative jac values equal 1, which is no change
-                #log base 10 transform jacobians
-                log_jac = np.log10(jac_arr)
+                #natural log transform jacobians
+                log_jac = np.log(jac_arr)
                 log_jac_path = log_jacobians_dir / ( 'log_jac_' + specimen_id + '.' + filetype)
                 common.write_array(log_jac, log_jac_path)
             #else write_raw_jacobians:
             else:
                 new_jac.unlink()
         else:
-            log_jac = np.log10(jac_arr)
+            log_jac = np.log(jac_arr)
             log_jac_path = log_jacobians_dir / ( 'log_jac_' + specimen_id + '.' + filetype)
             common.write_array(log_jac, log_jac_path)
 
