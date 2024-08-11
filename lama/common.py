@@ -260,7 +260,7 @@ def write_array(array: np.ndarray, path: Union[str, Path], compressed=False, ras
     img = sitk.GetImageFromArray(array)
     if ras:
         img.SetDirection((-1, 0, 0, 0, -1, 0, 0, 0, 1))
-    sitk.WriteImage(img, path, compressed)
+    sitk.WriteImage(img, path, compressed, compressionLevel=1)
 
 
 def read_array( path: Union[str, Path]):
