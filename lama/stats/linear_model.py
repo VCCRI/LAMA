@@ -26,7 +26,7 @@ from lama import common
 LM_SCRIPT = str(common.lama_root_dir / 'stats' / 'rscripts' / 'lmFast.R')
 
 # If debugging, don't delete the temp files used for communication with R so they can be used for R debugging.
-DEBUGGING = True
+DEBUGGING = False
 
 
 def lm_r(data: np.ndarray, info: pd.DataFrame, plot_dir:Path=None, boxcox:bool=False, use_staging: bool=True) -> Tuple[np.ndarray, np.ndarray]:
