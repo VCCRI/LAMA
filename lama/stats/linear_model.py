@@ -4,6 +4,7 @@ The code to run linear models in R.
 The current interface to R is to write binary files that R can read (numpy_to_dat). The reason r2py wasn't used is that
 it used to be a pain to install. I imagine it's better now and using docker should improve things so adding
 rp2y interface is on the todo list
+test
 """
 
 
