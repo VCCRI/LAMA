@@ -547,8 +547,8 @@ def run(wt_dir: Path,
     line_alt.to_csv(line_alt_pvals_file)
     spec_alt.to_csv(spec_alt_pvals_file)
 
-    line_organ_thresholds = p_thresholds.get_thresholds(line_null, line_alt)
-    specimen_organ_thresholds = p_thresholds.get_thresholds(specimen_null, spec_alt)
+    line_organ_thresholds = p_thresholds.get_thresholds(line_null, line_alt, line_fdr)
+    specimen_organ_thresholds = p_thresholds.get_thresholds(specimen_null, spec_alt, specimen_fdr)
 
     line_thresholds_path = dists_out / 'line_organ_p_thresholds.csv'
     spec_thresholds_path = dists_out / 'specimen_organ_p_thresholds.csv'
