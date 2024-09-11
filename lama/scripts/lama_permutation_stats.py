@@ -28,7 +28,8 @@ allowed_cfg_keys = [
     'norm_to_whole_embryo_vol',
     'qc_file',
     'voxel_size',
-
+    'line_fdr',
+    'specimen_fdr',
 ]
 
 
@@ -78,6 +79,8 @@ def run(cfg_path):
     wev_norm = bool(cfg.get('norm_to_whole_embryo_vol', True))
     qc_file = p(cfg.get('qc_file'))
     voxel_size = float(cfg.get('voxel_size', 1.0))
+    line_fdr = float(cfg.get('line_fdr', 0.05))
+    specimen_fdr = float(cfg.get('specimen_fdr', 0.2))
 
     run_permutation_stats.run(wt_dir=wt_dir,
                               mut_dir=mut_dir,
@@ -85,8 +88,11 @@ def run(cfg_path):
                               num_perms=n_perm,
                               label_info=label_meta,
                               label_map_path=label_map,
-                              normalise_to_whole_embryo=wev_norm, qc_file=qc_file,
-                              voxel_size=voxel_size)
+                              normalise_to_whole_embryo=wev_norm,
+                              qc_file=qc_file,
+                              voxel_size=voxel_size,
+                              line_fdr = line_fdr,
+                              specimen_fdr = specimen_fdr)
 
 
 if __name__ == '__main__':
