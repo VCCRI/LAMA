@@ -221,15 +221,16 @@ def annotate(thresholds: pd.DataFrame,
         if not is_line_level:
             # specimen-level has an extra line column we need to remove
             df = df.T.drop(columns=['line']).T
-
-        # Rename the line_specimen column to be more informative
-        df.rename(columns={id_: GENOTYPE_P_COL_NAME}, inplace=True)
-
-        if is_line_level:
-            line = id_
+            spec_id = id_  # Store the specimen ID
         else:
+            line = id_
+        # Rename the line_specimen column to be more informative
+        #df.rename(columns={id_: GENOTYPE_P_COL_NAME}, inplace=True)
+        spec_name = df.columns
+        df = pd.DataFrame(np.stack(df.iloc[:, 0]), index=df.index)
+        df.rename(columns={0: GENOTYPE_P_COL_NAME}, inplace=True)
+        if not is_line_level:
             line = row['line']
-            spec_id = id_
 
         # Merge the permutation results (p-thresh, fdr, number of hit lines for this label) with the mutant results
         df.index = df.index.astype(np.int64)  # Index needs to be cast from object to enable merge
@@ -262,9 +263,19 @@ def annotate(thresholds: pd.DataFrame,
             label_col = f'x{label}'
             label_organ_vol = organ_volumes[[label_col, 'line']]
             wt_ovs = label_organ_vol[label_organ_vol.line == 'baseline'][f'x{label}']
-            mut_ovs = label_organ_vol[label_organ_vol.line == line][f'x{label}']
-
-            df.loc[label, 'mean_vol_ratio'] =  mut_ovs.mean() / wt_ovs.mean()
+          
+            if is_line_level:
+                mut_ovs = label_organ_vol[label_organ_vol.line == line][label_col]
+                df.loc[label, 'mean_vol_ratio'] = mut_ovs.mean() / wt_ovs.mean()
+                df.loc[label, 'cohens_d'] = cohens_d(mut_ovs, wt_ovs)
+            else:
+                # Use the stored spec_id for specimen-level analysis
+                spec_ov = organ_volumes.loc[spec_id, label_col]
+                if not pd.isna(spec_ov):
+                    df.loc[label, 'mean_vol_ratio'] = spec_ov / wt_ovs.mean()
+                else:
+                    df.loc[label, 'mean_vol_ratio'] = None
+          
             if is_line_level:
                 cd = cohens_d(mut_ovs,wt_ovs)
                 df.loc[label, 'cohens_d'] = cd
