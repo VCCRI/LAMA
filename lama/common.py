@@ -937,10 +937,13 @@ def service_shutdown(signum, frame):
 
 
 def available_memory() -> float:
-    """
-    Get the number of memory availbe in bytes
-    """
-    return psutil.virtual_memory().available
+    
+    #Get the number of memory available in bytes based on the MEMORY_LIMIT environment variable.
+    if 'MEMORY_LIMIT' in os.environ:
+        return int(os.environ['MEMORY_LIMIT'])
+    else:
+        # Fallback to psutil if the environment variable is not set
+        return psutil.virtual_memory().available
 
 
 def download_and_extract_zip(url: Path, out_dir: Path):
