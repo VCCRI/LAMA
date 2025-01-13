@@ -102,7 +102,7 @@ def get_thresholds(null_dist: pd.DataFrame, alt_dist: pd.DataFrame, target_thres
 
         else:
             best_fdr = 1
-            p_thresh = np.NAN
+            p_thresh = np.nan
             num_hits = 0
             num_null, num_null_lt_thresh, num_alt = ['NA'] * 3
 
