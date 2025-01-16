@@ -20,7 +20,7 @@ def heatmap(data: pd.DataFrame, title, use_sns=False):
         if data.isnull().values.all():
             return
         try:
-            sns.heatmap(data, cmap=sns.color_palette("coolwarm", 100), ax=ax, cbar_kws={'label': 'mean volume ratio'},
+            sns.heatmap(data, cmap=sns.color_palette("coolwarm", 100), center=1, ax=ax, cbar_kws={'label': 'mean volume ratio'},
                     square=True)
         except ValueError:
             ...
