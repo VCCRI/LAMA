@@ -160,18 +160,18 @@ def _modify_tforms(tforms: List[Path], outdir) -> Path:
         tp = new_names[stage]
 
         if i == len(new_names) - 1: # Just go back to rigid. Stage before rigid as no linked file
-            previous_tp_str = '(InitialTransformParametersFileName "NoInitialTransform")\n'
+            previous_tp_str = '(InitialTransformParameterFileName "NoInitialTransform")\n'
 
         else:
             previous_tp = f'{list(tforms)[len(new_names) - (i + 2) ]}.txt'
-            previous_tp_str ='(InitialTransformParametersFileName "{}")\n'.format(previous_tp)
+            previous_tp_str ='(InitialTransformParameterFileName "{}")\n'.format(previous_tp)
 
         with open(tp, 'r') as fh:
             lines = []
 
             for line in fh:
 
-                if line.startswith('(InitialTransformParametersFileName'):
+                if line.startswith('(InitialTransformParameterFileName'):
                     lines.append(previous_tp_str)
                     continue
                 lines.append(line)
