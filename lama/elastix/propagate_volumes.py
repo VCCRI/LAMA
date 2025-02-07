@@ -425,8 +425,8 @@ def chain_tforms(root_dir: Path, new_tform_dir, tform_name, config):
 
             for line in fh:
                 #
-                if line.startswith('(InitialTransformParametersFileName') and init_tform:
-                    line = f'(InitialTransformParametersFileName "{str(init_tform)}")\n'
+                if line.startswith('(InitialTransformParameterFileName') and init_tform:
+                    line = f'(InitialTransformParameterFileName "{str(init_tform)}")\n'
                 else:
                     for param in label_replacements:
                         if line.startswith(f'({param}'):
