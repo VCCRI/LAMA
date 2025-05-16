@@ -68,7 +68,7 @@ def pvalue_dist_plots(null: pd.DataFrame, alt: pd.DataFrame, thresholds: pd.Data
             hist(null[col])
             plt.xlabel(x_label)
 
-            outpath = outdir / f'{col}.png'
+            outpath = outdir / f'{col}.pdf'
 
             plt.axvline(log_thresh, 0, 1, alpha=0.4, color='g')
 
@@ -241,9 +241,9 @@ def make_plots(organ_vols: pd.DataFrame,
         # fig.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
         if skip_no_analysis:
-            box_name = f'{mut_line}_boxplots_no_analysis.png'
+            box_name = f'{mut_line}_boxplots_no_analysis.pdf'
         else:
-            box_name = f'{mut_line}_boxplots.png'
+            box_name = f'{mut_line}_boxplots.pdf'
 
         # TODO: Fix the boxplot or swarm plot output
         # fig.savefig(stats_line_dir / box_name)
@@ -253,9 +253,9 @@ def make_plots(organ_vols: pd.DataFrame,
         fig_scat.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
         if skip_no_analysis:
-            scatter_name = f'{mut_line}_scatter_plots_no_analysis_normalised.png'
+            scatter_name = f'{mut_line}_scatter_plots_no_analysis_normalised.pdf'
         else:
-            scatter_name = f'{mut_line}_scatter_plots.png'
+            scatter_name = f'{mut_line}_scatter_plots.pdf'
         fig_scat.savefig(stats_line_dir / scatter_name)
 
 
