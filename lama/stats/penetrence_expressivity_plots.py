@@ -113,7 +113,7 @@ def line_specimen_hit_heatmap(line_hits_csv: Path,
 
     plt.tight_layout()
 
-    plt.savefig(outdir / f"{line}_organ_hit_heatmap.png")
+    plt.savefig(outdir / f"{line}_organ_hit_heatmap.pdf")
     plt.close()
 
 
