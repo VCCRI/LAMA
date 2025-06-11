@@ -280,11 +280,7 @@ def annotate(thresholds: pd.DataFrame,
                         f"but got {getattr(raw, 'shape', '?')} entries."
                     )
                 #spec_ov should now be scalar
-                spec_ov = organ_volumes.loc[spec_id, label_col]
-                if not pd.isna(spec_ov):
-                    df.loc[label, 'mean_vol_ratio'] = spec_ov / wt_ovs.mean()
-                else:
-                    df.loc[label, 'mean_vol_ratio'] = None
+                df.loc[label, 'mean_vol_ratio'] = spec_ov / wt_ovs.mean()
           
             if is_line_level:
                 cd = cohens_d(mut_ovs,wt_ovs)
