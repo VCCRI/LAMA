@@ -270,6 +270,16 @@ def annotate(thresholds: pd.DataFrame,
                 df.loc[label, 'cohens_d'] = cohens_d(mut_ovs, wt_ovs)
             else:
                 # Use the stored spec_id for specimen-level analysis
+                # deal with duplicates - the situation where spec_id is a series rather than scalar
+                raw = organ_volumes.loc[spec_id, label_col]
+                try:
+                    spec_ov = raw.item()   # FAILS if len(raw) != 1
+                except ValueError:
+                    raise ValueError(
+                        f"Expected exactly one row for spec_id={spec_id} in column {label_col}, "
+                        f"but got {getattr(raw, 'shape', '?')} entries."
+                    )
+                #spec_ov should now be scalar
                 spec_ov = organ_volumes.loc[spec_id, label_col]
                 if not pd.isna(spec_ov):
                     df.loc[label, 'mean_vol_ratio'] = spec_ov / wt_ovs.mean()
