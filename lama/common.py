@@ -1036,7 +1036,7 @@ def logMemoryUsageInfo():
     globalMemInfo = psutil.virtual_memory()
 
     totalMem = bytesToGb(globalMemInfo.total, 5)
-    totalMemAvailable = bytesToGb(globalMemInfo.available, 5)
+    totalMemAvailable = bytesToGb(available_memory(), 5)
     procMemRSS = bytesToGb(procMemInfo.rss, 5)
     procMemVMS = bytesToGb(procMemInfo.vms, 5)
     procMemData = bytesToGb(procMemInfo.data, 5)
