@@ -293,9 +293,12 @@ def write_threshold_file(pvals, tvals, outpath):
     rows = ['"","F-statistic","tvalue-(Intercept)","tvalue-gf$genotypeKO"\n']
     row_template = '"{}", NA, NA, {}\n'
     for pvalue in [0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1, 0.15, 0.2]:
-        try:
-            t_thresh = np.min(tvals[np.where((pvals <= pvalue) & (tvals > 0))])
-        except ValueError:  # No minimum availbale
+        # Find all t-values for significant results (pvals here are actually qvals, or maybe be either depending on line or specimen level)
+        significant_tvals = tvals[pvals <= pvalue]
+        if significant_tvals.size > 0:
+            # Find the minimum of the absolute t-values
+            t_thresh = np.min(np.abs(significant_tvals))
+        else:
             t_thresh = 'NA'
 
         row = row_template.format(str(pvalue), str(t_thresh))
