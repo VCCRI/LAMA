@@ -14,6 +14,10 @@ from pathlib import Path
 import math
 from typing import List
 
+import matplotlib as mpl
+
+mpl.rcParams["pdf.fonttype"] = 42  # TrueType fonts - editable in Illustrator
+
 import numpy as np
 import seaborn as sns
 from matplotlib.figure import Figure
