@@ -305,8 +305,8 @@ def _modify_inverted_tform_file(elx_tform_file: Path, newfile_name: str=None):
         with open(new_file, "w+") as new_tform_param_fh,  open(elx_tform_file, "r") as tform_param_fh:
 
             for line in tform_param_fh:
-                if line.startswith('(InitialTransformParametersFileName'):
-                    line = '(InitialTransformParametersFileName "NoInitialTransform")\n'
+                if line.startswith('(InitialTransformParameterFileName'):
+                    line = '(InitialTransformParameterFileName "NoInitialTransform")\n'
                 new_tform_param_fh.write(line)
             new_tform_param_fh.close()
             tform_param_fh.close()
