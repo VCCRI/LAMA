@@ -198,8 +198,8 @@ def write_tform(tform_params, other_data, tform_file, init_tform=None):
 
         for line in other_data:
 
-            if init_tform and line.startswith('(InitialTransformParametersFileName'):
-                line = f'(InitialTransformParametersFileName "{init_tform}")\n'
+            if init_tform and line.startswith('(InitialTransformParameterFileName'):
+                line = f'(InitialTransformParameterFileName "{init_tform}")\n'
 
             if line.startswith('(NumberOfParameters '):
                 num_params = int(line.strip().strip(')').split(' ')[1])
