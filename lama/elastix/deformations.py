@@ -191,11 +191,11 @@ def _chain_tforms(tforms: List):
         with open(tp, 'r') as fh:
             lines = []
             for line in fh:
-                if line.startswith('(InitialTransformParametersFileName'):
+                if line.startswith('(InitialTransformParameterFileName'):
                     continue
                 lines.append(line)
 
-        previous_tp_str = '(InitialTransformParametersFileName "{}")'.format(initial_tp)
+        previous_tp_str = '(InitialTransformParameterFileName "{}")'.format(initial_tp)
         lines.insert(0, previous_tp_str + '\n')
         with open(tp, 'w') as wh:
             for line in lines:
